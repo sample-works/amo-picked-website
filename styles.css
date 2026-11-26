@@ -185,11 +185,13 @@ textarea {
   font-weight: 700;
   font-size: 0.98rem;
   letter-spacing: -0.02em;
+  white-space: nowrap;
 }
 
 .brand-sub {
   font-size: 0.7rem;
   color: var(--ink-3);
+  white-space: nowrap;
 }
 
 .nav-links {
@@ -217,11 +219,13 @@ textarea {
   display: flex;
   align-items: center;
   gap: 0.55rem;
+  flex-shrink: 0;
 }
 
 .icon-pill {
   width: 36px;
   height: 36px;
+  flex-shrink: 0;
   border-radius: 50%;
   border: 1px solid var(--border);
   background: var(--bg-card);
@@ -289,6 +293,8 @@ textarea {
   display: none;
   align-items: center;
   gap: 0.4rem;
+  flex-shrink: 0;
+  white-space: nowrap;
   padding: 0.45rem 0.85rem;
   border-radius: var(--r-pill);
   border: 1px solid var(--border);
@@ -1518,7 +1524,8 @@ textarea {
     font-size: 0.65rem;
   }
 
-  .nav-links {
+  .nav-links,
+  .nav-book-btn {
     display: none;
   }
 

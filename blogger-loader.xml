@@ -10,7 +10,6 @@
   <link href='https://fonts.googleapis.com' rel='preconnect'/>
   <link crossorigin='' href='https://fonts.gstatic.com' rel='preconnect'/>
   <link href='https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap' rel='stylesheet'/>
-  <link href='https://cdn.jsdelivr.net/gh/sample-works/amo-picked-website@main/styles.css' rel='stylesheet'/>
 
   <b:skin><![CDATA[
     /* Amo Picked Photography — GitHub Auto-Sync Blogger Loader */
@@ -64,6 +63,49 @@
     </b:section>
   </div>
 
-  <script src='https://cdn.jsdelivr.net/gh/sample-works/amo-picked-website@main/app.js'></script>
+  <script type='text/javascript'>
+  //<![CDATA[
+  (function () {
+    var REPO = 'sample-works/amo-picked-website';
+    var FALLBACK_REF = '3701da1';
+    function boot(ref) {
+      var base = 'https://cdn.jsdelivr.net/gh/' + REPO + '@' + ref;
+      var css = document.createElement('link');
+      css.rel = 'stylesheet';
+      css.href = base + '/styles.css';
+      var loaded = false;
+      function loadApp() {
+        if (loaded) return;
+        loaded = true;
+        var js = document.createElement('script');
+        js.src = base + '/app.js';
+        document.body.appendChild(js);
+      }
+      css.onload = loadApp;
+      css.onerror = loadApp;
+      document.head.appendChild(css);
+      setTimeout(loadApp, 1500);
+    }
+    var timer = setTimeout(function () {
+      timer = null;
+      boot(FALLBACK_REF);
+    }, 1200);
+    fetch('https://api.github.com/repos/' + REPO + '/commits/main')
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+      .then(function (d) {
+        if (!timer) return;
+        clearTimeout(timer);
+        timer = null;
+        boot((d && d.sha) ? d.sha : FALLBACK_REF);
+      })
+      .catch(function () {
+        if (!timer) return;
+        clearTimeout(timer);
+        timer = null;
+        boot(FALLBACK_REF);
+      });
+  })();
+  //]]>
+  </script>
 </body>
 </html>
