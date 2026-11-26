@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:version='2' class='v2' expr:dir='data:blog.languageDirection' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<head>
+  <meta charset='UTF-8'/>
+  <meta content='width=device-width, initial-scale=1.0' name='viewport'/>
+  <title><data:blog.pageTitle/></title>
+  <b:include data='blog' name='all-head-content'/>
+
+  <link href='https://fonts.googleapis.com' rel='preconnect'/>
+  <link crossorigin='' href='https://fonts.gstatic.com' rel='preconnect'/>
+  <link href='https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap' rel='stylesheet'/>
+  <link href='https://cdn.jsdelivr.net/gh/tamilkatturai/amo-picked-website@main/styles.css' rel='stylesheet'/>
+
+  <b:skin><![CDATA[
+    /* Amo Picked Photography — GitHub Auto-Sync Blogger Loader */
+    body { margin: 0; }
+  ]]></b:skin>
+
+  <style type='text/css'>
+  /*<![CDATA[*/
+  #navbar-iframe, #Navbar1, .navbar-iframe, .navbar-iframe-container {
+    display: none !important;
+    height: 0 !important;
+    visibility: hidden !important;
+  }
+  body { margin-top: 0 !important; padding-top: 0 !important; }
+  #blogger-journal-slot {
+    display: none;
+    width: min(1200px, 92vw);
+    margin: 2rem auto 4rem;
+  }
+  #blogger-journal-slot .post-outer {
+    background: var(--bg-card, #fff);
+    border: 1px solid var(--border, rgba(15,23,42,0.09));
+    border-radius: 24px;
+    padding: 1.75rem;
+    margin-bottom: 1.25rem;
+  }
+  /*]]>*/
+  </style>
+</head>
+<body>
+  <div id='amo-app'></div>
+
+  <div id='blogger-journal-slot'>
+    <b:section class='main' id='main' showaddelement='yes'>
+      <b:widget id='Blog1' locked='false' title='Blog Posts' type='Blog'>
+        <b:includable id='main' var='top'>
+          <div class='blog-posts'>
+            <b:loop values='data:posts' var='post'>
+              <article class='post-outer'>
+                <b:if cond='data:post.title'>
+                  <h3 class='post-title'>
+                    <a expr:href='data:post.url'><data:post.title/></a>
+                  </h3>
+                </b:if>
+                <div class='post-body'><data:post.body/></div>
+              </article>
+            </b:loop>
+          </div>
+        </b:includable>
+      </b:widget>
+    </b:section>
+  </div>
+
+  <script src='https://cdn.jsdelivr.net/gh/tamilkatturai/amo-picked-website@main/app.js'></script>
+</body>
+</html>
