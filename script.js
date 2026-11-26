@@ -261,7 +261,14 @@ function initAmoSite() {
   const AMO_BEHOLD_FEED_URL = '';
 
   // 2) Or paste specific @amo_picked Instagram post/reel URLs here:
-  const AMO_IG_POSTS = [];
+  const AMO_IG_POSTS = [
+    'https://www.instagram.com/amo_picked/reel/DedshKKOaak/',
+    'https://www.instagram.com/amo_picked/p/DcXp4PHM4km/',
+    'https://www.instagram.com/elrusina/p/DbAvE1jjZWM/',
+    'https://www.instagram.com/amo_picked/p/DaoogthylyI/',
+    'https://www.instagram.com/amo_picked/reel/DZomb1SSeS7/',
+    'https://www.instagram.com/amo_picked/p/C8f72WnS509/',
+  ];
 
   const igFeedGrid = document.getElementById('igFeedGrid');
   const igEmbedMount = document.getElementById('igEmbedMount');
@@ -296,8 +303,11 @@ function initAmoSite() {
       });
   } else if (igEmbedMount && AMO_IG_POSTS.length) {
     igEmbedMount.innerHTML = AMO_IG_POSTS.map((url) => {
-      const clean = url.replace(/\/+$/, '');
-      return `<iframe class="ig-embed-frame" src="${clean}/embed" loading="lazy" allowtransparency="true" title="Instagram post from @amo_picked"></iframe>`;
+      const m = url.match(/instagram\.com\/(?:[^/]+\/)?(p|reel)\/([^/?#]+)/i);
+      const embedSrc = m
+        ? `https://www.instagram.com/${m[1].toLowerCase()}/${m[2]}/embed/`
+        : `${url.replace(/\/+$/, '')}/embed/`;
+      return `<iframe class="ig-embed-frame" src="${embedSrc}" loading="lazy" allowtransparency="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" title="Instagram post from @amo_picked"></iframe>`;
     }).join('');
     igEmbedMount.style.display = 'grid';
     if (igFallback) igFallback.style.display = 'none';
