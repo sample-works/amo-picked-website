@@ -287,13 +287,19 @@ textarea {
 
 .mobile-toggle {
   display: none;
-  padding: 0.45rem 0.8rem;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.85rem;
   border-radius: var(--r-pill);
   border: 1px solid var(--border);
   background: var(--bg-card);
   font-size: 0.82rem;
   font-weight: 600;
   cursor: pointer;
+}
+
+.mobile-only-item {
+  display: none;
 }
 
 /* ==========================================================================
@@ -1497,6 +1503,21 @@ textarea {
 }
 
 @media (max-width: 768px) {
+  .navbar-wrap {
+    top: 8px;
+    margin-top: 8px;
+    padding: 0 0.65rem;
+  }
+
+  .navbar {
+    position: relative;
+    padding: 0.5rem 0.65rem 0.5rem 0.9rem;
+  }
+
+  .brand-sub {
+    font-size: 0.65rem;
+  }
+
   .nav-links {
     display: none;
   }
@@ -1508,21 +1529,68 @@ textarea {
   .nav-links.mobile-open {
     display: flex;
     flex-direction: column;
+    align-items: stretch;
     position: absolute;
     top: calc(100% + 8px);
-    left: 1rem;
-    right: 1rem;
+    left: 0;
+    right: 0;
     background: var(--bg-card);
-    border: 1px solid var(--border);
+    border: 1px solid var(--border-strong);
     border-radius: var(--r-md);
-    padding: 1rem;
+    padding: 0.65rem;
+    gap: 0.25rem;
     box-shadow: var(--shadow-lg);
+    z-index: 10000;
+  }
+
+  .nav-links.mobile-open li {
+    width: 100%;
+  }
+
+  .nav-links.mobile-open a {
+    display: block;
+    width: 100%;
+    padding: 0.72rem 0.95rem;
+    border-radius: var(--r-sm);
+    font-size: 0.94rem;
+    font-weight: 600;
+  }
+
+  .nav-links.mobile-open .mobile-only-item {
+    display: block;
+    margin-top: 0.3rem;
+    padding-top: 0.35rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .nav-links.mobile-open .mobile-book-link {
+    background: var(--ink);
+    color: var(--bg);
+    text-align: center;
+    border-radius: var(--r-pill);
+  }
+
+  .filter-bar {
+    border-radius: var(--r-md);
+    width: 100%;
   }
 
   .services-grid,
-  .form-row,
-  .hero-stats {
+  .form-row {
     grid-template-columns: 1fr;
+  }
+
+  .hero-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+  }
+
+  .stat-box {
+    padding: 0.75rem 0.65rem;
+  }
+
+  .stat-box strong {
+    font-size: 1.08rem;
   }
 
   .gallery-item,
@@ -1532,7 +1600,20 @@ textarea {
   }
 
   .floating-wa {
-    bottom: 0.9rem;
-    right: 0.9rem;
+    bottom: 0.85rem;
+    right: 0.85rem;
+    padding: 0.62rem 1rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .nav-book-btn,
+  .brand-sub {
+    display: none;
+  }
+
+  .hero-stats {
+    grid-template-columns: 1fr;
   }
 }

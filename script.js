@@ -53,31 +53,44 @@ function initAmoSite() {
 
   // Mobile menu
   if (mobileToggle && navLinks) {
-    mobileToggle.addEventListener('click', () => {
+    const toggleLabel = mobileToggle.querySelector('span');
+    const closeMenu = () => {
+      navLinks.classList.remove('mobile-open');
+      mobileToggle.setAttribute('aria-expanded', 'false');
+      if (toggleLabel) toggleLabel.textContent = 'Menu';
+    };
+
+    mobileToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
       const open = navLinks.classList.toggle('mobile-open');
       mobileToggle.setAttribute('aria-expanded', String(open));
+      if (toggleLabel) toggleLabel.textContent = open ? 'Close' : 'Menu';
     });
+
     navLinks.querySelectorAll('a').forEach((a) => {
-      a.addEventListener('click', () => {
-        navLinks.classList.remove('mobile-open');
-        mobileToggle.setAttribute('aria-expanded', 'false');
-      });
+      a.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('click', (e) => {
+      if (navLinks.classList.contains('mobile-open') && !navbar?.contains(e.target)) {
+        closeMenu();
+      }
     });
   }
 
-  // Smooth reveal animations
+  // Smooth reveal animations (also reveal elements already scrolled past)
   const reveals = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
-          if (e.isIntersecting) {
+          if (e.isIntersecting || e.boundingClientRect.top < window.innerHeight) {
             e.target.classList.add('visible');
             io.unobserve(e.target);
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.05 }
     );
     reveals.forEach((el) => io.observe(el));
   } else {
