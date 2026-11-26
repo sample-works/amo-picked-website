@@ -558,8 +558,8 @@
           <div class="ig-header">
             <div class="ig-profile">
               <div class="ig-avatar-ring">
-                <div class="ig-avatar-inner">
-                  <img src="assets/hero-surf.jpg" alt="Amo Picked Instagram avatar" />
+                <div class="ig-avatar-inner" style="display:grid;place-items:center;font-weight:800;font-size:0.85rem;">
+                  AMO
                 </div>
               </div>
               <div>
@@ -568,59 +568,28 @@
               </div>
             </div>
             <a href="https://www.instagram.com/amo_picked/" target="_blank" rel="noopener" class="btn btn-primary btn-sm">
-              Follow @amo_picked →
+              View Live on Instagram →
             </a>
           </div>
 
-          <div class="ig-grid">
-            <a href="https://www.instagram.com/amo_picked/" target="_blank" rel="noopener" class="ig-tile">
-              <span class="ig-badge">Reel · Surf</span>
-              <img src="assets/hero-surf.jpg" alt="Surf photography reel on @amo_picked" />
-              <div class="ig-tile-overlay">
-                <strong>Surf Action Session</strong>
-                <span>View on @amo_picked →</span>
-              </div>
-            </a>
+          <!-- Populated automatically when AMO_BEHOLD_FEED_URL is set in script -->
+          <div class="ig-grid" id="igFeedGrid" style="display:none;"></div>
 
-            <a href="https://www.instagram.com/amo_picked/" target="_blank" rel="noopener" class="ig-tile">
-              <span class="ig-badge">4K Drone</span>
-              <img src="assets/drone-bay.jpg" alt="Arugam Bay Main Point on @amo_picked" />
-              <div class="ig-tile-overlay">
-                <strong>Arugam Bay Main Point</strong>
-                <span>View on @amo_picked →</span>
-              </div>
-            </a>
+          <!-- Populated automatically when AMO_IG_POSTS URLs are added in script -->
+          <div class="ig-embed-grid" id="igEmbedMount" style="display:none;"></div>
 
-            <a href="https://www.instagram.com/amo_picked/" target="_blank" rel="noopener" class="ig-tile">
-              <span class="ig-badge">Lifestyle</span>
-              <img src="assets/lifestyle-beach.jpg" alt="Sri Lanka coastal photography on @amo_picked" />
-              <div class="ig-tile-overlay">
-                <strong>Coastal Shoreline</strong>
-                <span>View on @amo_picked →</span>
-              </div>
-            </a>
-
-            <a href="https://www.instagram.com/amo_picked/" target="_blank" rel="noopener" class="ig-tile">
-              <span class="ig-badge">Safari</span>
-              <img src="assets/safari-camp.jpg" alt="Sri Lanka wildlife safari on @amo_picked" />
-              <div class="ig-tile-overlay">
-                <strong>Yala &amp; Kumana Safari</strong>
-                <span>View on @amo_picked →</span>
-              </div>
-            </a>
-
-            <a href="https://www.instagram.com/amo_picked/" target="_blank" rel="noopener" class="ig-tile">
-              <span class="ig-badge">Weligama</span>
-              <img src="assets/marathon-event.jpg" alt="Weligama Bay surf on @amo_picked" />
-              <div class="ig-tile-overlay">
-                <strong>Weligama Bay</strong>
-                <span>View on @amo_picked →</span>
-              </div>
+          <!-- Shown when no live API feed / post links are connected yet -->
+          <div class="ig-connect-box" id="igFallback">
+            <div>
+              <strong>Daily Surf, Drone &amp; Travel Stories on @amo_picked</strong>
+              <p>
+                See our newest surf sessions, 4K drone reels, camping trips, and Arugam Bay &amp; Weligama highlights directly on our official Instagram profile.
+              </p>
+            </div>
+            <a href="https://www.instagram.com/amo_picked/" target="_blank" rel="noopener" class="btn btn-soft btn-sm">
+              Open @amo_picked on Instagram →
             </a>
           </div>
-
-          <!-- Optional live Instagram post embeds: add post/reel URLs to AMO_IG_POSTS in script -->
-          <div class="ig-embed-grid" id="igEmbedMount"></div>
         </div>
       </div>
     </section>

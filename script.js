@@ -243,16 +243,51 @@ function initAmoSite() {
     reviewsTrack.innerHTML += reviewsTrack.innerHTML;
   }
 
-  // Optional live Instagram post/reel iframe embeds (paste any /p/ or /reel/ URLs)
+  // 1) Optional automatic live Instagram feed via Behold.so (free Meta API bridge)
+  // Connect @amo_picked at https://behold.so and paste your JSON feed URL below:
+  const AMO_BEHOLD_FEED_URL = '';
+
+  // 2) Or paste specific @amo_picked Instagram post/reel URLs here:
   const AMO_IG_POSTS = [];
+
+  const igFeedGrid = document.getElementById('igFeedGrid');
   const igEmbedMount = document.getElementById('igEmbedMount');
-  if (igEmbedMount && AMO_IG_POSTS.length) {
+  const igFallback = document.getElementById('igFallback');
+
+  if (AMO_BEHOLD_FEED_URL && igFeedGrid) {
+    fetch(AMO_BEHOLD_FEED_URL)
+      .then((res) => res.json())
+      .then((data) => {
+        const posts = (data.posts || data || []).slice(0, 5);
+        if (!posts.length) return;
+        igFeedGrid.innerHTML = posts
+          .map((p) => {
+            const img = p.sizes?.medium?.mediaUrl || p.thumbnailUrl || p.mediaUrl || '';
+            const caption = (p.prunedCaption || p.caption || 'View post on @amo_picked').slice(0, 72);
+            const badge = p.mediaType === 'VIDEO' ? 'Reel' : p.mediaType === 'CAROUSEL_ALBUM' ? 'Album' : 'Photo';
+            return `<a href="${p.permalink}" target="_blank" rel="noopener" class="ig-tile">
+              <span class="ig-badge">${badge}</span>
+              <img src="${img}" alt="Amo Picked Instagram post" loading="lazy" />
+              <div class="ig-tile-overlay">
+                <strong>${caption}</strong>
+                <span>View on @amo_picked →</span>
+              </div>
+            </a>`;
+          })
+          .join('');
+        igFeedGrid.style.display = 'grid';
+        if (igFallback) igFallback.style.display = 'none';
+      })
+      .catch(() => {
+        // Keep clean fallback card if feed fetch fails
+      });
+  } else if (igEmbedMount && AMO_IG_POSTS.length) {
     igEmbedMount.innerHTML = AMO_IG_POSTS.map((url) => {
       const clean = url.replace(/\/+$/, '');
       return `<iframe class="ig-embed-frame" src="${clean}/embed" loading="lazy" allowtransparency="true" title="Instagram post from @amo_picked"></iframe>`;
     }).join('');
-  } else if (igEmbedMount) {
-    igEmbedMount.style.display = 'none';
+    igEmbedMount.style.display = 'grid';
+    if (igFallback) igFallback.style.display = 'none';
   }
 
   // Booking form -> WhatsApp & Copy
